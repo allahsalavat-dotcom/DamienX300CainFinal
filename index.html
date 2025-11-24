@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DamienX300CainFinal</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;background:#000;overflow:hidden;cursor:none}
+        #main{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:160px;letter-spacing:30px;color:#f00;font-weight:900;text-transform:uppercase;animation:g 1.5s infinite}
+        @keyframes g{0%,100%{text-shadow:0 0 50px #f00}50%{text-shadow:0 0 120px #f00;transform:translate(-50%,-50%) scale(1.15)}}
+        #video{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:450px;object-fit:cover;opacity:0;filter:invert(1) hue-rotate(180deg) saturate(3);transition:opacity 3s;z-index:99}
+        #virus,#lock{position:fixed;inset:0;background:rgba(0,0,0,0.97);color:#f00;display:none;align-items:center;justify-content:center;flex-direction:column;gap:40px;font-size:60px;z-index:999}
+        #lock{font-size:120px;background:#000}
+        .creators{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:#900;font-size:26px;letter-spacing:10px;animation:c 4s infinite}
+        @keyframes c{0%,100%{opacity:0.4}50%{opacity:1}}
+    </style>
+</head>
+<body>
+    <div id="main">DAMIENX300CAIN</div>
+    <div class="creators">DamienX300Cain seni izliyor…</div>
+    <video id="video" autoplay playsinline muted></video>
+
+    <div id="virus">
+        <div>VİRÜS TESPİT EDİLDİ</div>
+        <div style="font-size:90px">DOSYALARIN ŞİFRELENİYOR… %100</div>
+    </div>
+    <div id="lock">KİLİTLENDİ</div>
+
+    <audio id="song" loop>
+        <source src="cain-sarkisi.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const v=document.getElementById('video'), s=document.getElementById('song'), virus=document.getElementById('virus'), lock=document.getElementById('lock');
+        let started=false;
+        document.addEventListener('click',()=>{if(started)return;started=true;
+            s.play();s.volume=0.3;
+            navigator.mediaDevices.getUserMedia({video:true}).then(stream=>{v.srcObject=stream;v.style.opacity=0.9;});
+            setTimeout(()=>{virus.style.display='flex';s.volume=1;
+                setTimeout(()=>{virus.style.display='none';lock.style.display='flex';
+                    document.documentElement.requestFullscreen?.();
+                    document.onkeydown=e=>e.preventDefault();
+                },4500);
+            },9000);
+        },{once:true});
+    </script>
+</body>
+</html>
